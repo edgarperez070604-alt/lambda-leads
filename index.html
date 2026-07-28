@@ -495,14 +495,31 @@
 
         const slowNoticeTimer = setTimeout(() => {
           button.textContent = 'Preparando servidor...';
-        }, 6000);
+        }, 5000);
+
+        const MAX_ATTEMPTS = 4;
+        const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
         try {
-          const res = await fetch('/api/leads', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-          });
+          let res = null;
+          let lastNetworkError = null;
+
+          for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+            try {
+              res = await fetch('/api/leads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+              });
+              lastNetworkError = null;
+              break;
+            } catch (networkErr) {
+              lastNetworkError = networkErr;
+              if (attempt < MAX_ATTEMPTS) await sleep(attempt * 3000);
+            }
+          }
+
+          if (!res) throw lastNetworkError;
 
           let result = {};
           try {
@@ -519,7 +536,7 @@
 
           if (res.ok) form.reset();
         } catch (err) {
-          status.textContent = 'No se pudo conectar con el servidor. Espera unos segundos e inténtalo de nuevo.';
+          status.textContent = 'No se pudo conectar con el servidor tras varios intentos. Espera un momento e inténtalo de nuevo.';
           status.classList.remove('hidden');
           status.classList.add('text-red-500');
         } finally {
