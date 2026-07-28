@@ -30,6 +30,7 @@
   }
 </script>
 <style>
+  html { scroll-behavior: smooth; }
   body { font-family: 'Inter', ui-sans-serif, system-ui; color: #1b1b18; }
   .font-serif { font-family: 'Lora', ui-serif, Georgia; }
   .hero-gradient {
@@ -41,6 +42,9 @@
       #f9f7f3;
     filter: blur(0px);
   }
+  .faq-icon { transition: transform 0.2s ease; }
+  .faq-item[open] .faq-icon { transform: rotate(45deg); }
+  .faq-summary::-webkit-details-marker { display: none; }
 </style>
 </head>
 <body class="bg-white text-ink antialiased">
@@ -51,28 +55,28 @@
       <div class="flex items-center gap-8">
         <span class="font-serif font-semibold text-xl">Lambda</span>
         <div class="hidden md:flex items-center gap-6 text-sm text-ink/70">
-          <a href="#" class="hover:text-ink">Nosotros</a>
-          <a href="#" class="hover:text-ink">Precios</a>
-          <a href="#" class="hover:text-ink">Casos de uso</a>
+          <a href="#" class="hover:text-ink transition-colors">Nosotros</a>
+          <a href="#" class="hover:text-ink transition-colors">Precios</a>
+          <a href="#" class="hover:text-ink transition-colors">Casos de uso</a>
         </div>
       </div>
-      <a href="#formulario" data-scroll-to-form class="bg-ink text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-ink/90 transition">Solicitar demo</a>
+      <a href="#formulario" data-scroll-to-form class="bg-ink text-white text-sm font-medium px-5 py-2.5 rounded-full shadow-sm hover:bg-ink/90 hover:shadow-md hover:-translate-y-0.5 transition">Solicitar demo</a>
     </nav>
   </header>
 
   <!-- HERO -->
-  <section id="formulario" class="hero-gradient pt-16 pb-10 px-6">
+  <section id="formulario" class="hero-gradient pt-16 pb-14 px-6">
     <div class="max-w-3xl mx-auto text-center">
-      <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur px-4 py-1.5 rounded-full text-xs font-medium text-ink/70 mb-6 shadow-sm">
+      <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur px-4 py-1.5 rounded-full text-xs font-medium text-ink/70 mb-6 shadow-sm ring-1 ring-black/5">
         <span>🎉</span> Ahora disponible para empresas
       </div>
-      <h1 class="font-serif text-4xl sm:text-5xl leading-tight mb-5">
+      <h1 class="font-serif text-4xl sm:text-5xl leading-tight tracking-tight mb-5">
         Una IA <span class="italic">verdaderamente</span> personalizada
       </h1>
       <p class="text-ink/60 text-base sm:text-lg max-w-xl mx-auto mb-7">
         Lambda es una inteligencia artificial a medida, entrenada con todo lo que tu empresa ve, dice o escucha. Tu equipo se preguntará cómo trabajaba antes sin ella.
       </p>
-      <form class="lead-form bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-black/5 p-6 sm:p-8 max-w-xl mx-auto text-left">
+      <form class="lead-form bg-white/90 backdrop-blur rounded-2xl shadow-lg shadow-black/5 border border-black/5 p-6 sm:p-8 max-w-xl mx-auto text-left">
         <div class="grid sm:grid-cols-2 gap-4 mb-4">
           <div>
             <label class="block text-xs font-medium text-ink/60 mb-1">Nombre</label>
@@ -106,7 +110,7 @@
             <textarea name="mensaje" rows="3" placeholder="Cuéntanos sobre tu proyecto o necesidad..." class="w-full bg-cream/60 px-4 py-2.5 rounded-lg text-sm border border-black/5 focus:outline-none focus:ring-2 focus:ring-ink/10"></textarea>
           </div>
         </div>
-        <button type="submit" class="w-full bg-gradient-to-r from-purple-400 to-pink-400 text-white text-sm font-medium px-6 py-3 rounded-full hover:opacity-90 transition">Solicitar demo</button>
+        <button type="submit" class="w-full bg-gradient-to-r from-purple-400 to-pink-400 text-white text-sm font-medium px-6 py-3 rounded-full shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:opacity-95 transition-all">Solicitar demo</button>
         <p class="lead-form-status text-xs text-center mt-3 hidden"></p>
       </form>
       <p class="text-xs text-ink/40 mt-3">Impulsado por IA de última generación</p>
@@ -138,12 +142,13 @@
   </section>
 
   <!-- SOCIAL PROOF -->
-  <section class="px-6 py-12 bg-white">
+  <section class="px-6 py-16 sm:py-20 bg-white">
     <div class="max-w-4xl mx-auto text-center">
-      <p class="text-sm text-ink/50 mb-6">Empresas usan Lambda para lograr más, más rápido.</p>
-      <div class="grid sm:grid-cols-2 gap-4 mb-8">
-        <div class="bg-cream rounded-2xl p-6 text-left">
-          <p class="text-sm mb-4">"Lambda es un gran ejemplo de cómo la IA puede aumentar la inteligencia empresarial."</p>
+      <p class="text-sm text-ink/50 mb-8">Empresas usan Lambda para lograr más, más rápido.</p>
+      <div class="grid sm:grid-cols-2 gap-5 mb-10">
+        <div class="bg-cream rounded-2xl p-7 text-left shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <span class="font-serif text-3xl text-ink/15 leading-none">❝</span>
+          <p class="text-sm -mt-2 mb-4">Lambda es un gran ejemplo de cómo la IA puede aumentar la inteligencia empresarial.</p>
           <div class="flex items-center gap-3">
             <img src="https://placehold.co/40x40/e3e8dc/555?text=MA" class="w-9 h-9 rounded-full" alt="Marcos A.">
             <div>
@@ -152,8 +157,9 @@
             </div>
           </div>
         </div>
-        <div class="bg-cream rounded-2xl p-6 text-left">
-          <p class="text-sm mb-4">"Lambda es una revelación refrescante en el panorama de la IA."</p>
+        <div class="bg-cream rounded-2xl p-7 text-left shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <span class="font-serif text-3xl text-ink/15 leading-none">❝</span>
+          <p class="text-sm -mt-2 mb-4">Lambda es una revelación refrescante en el panorama de la IA.</p>
           <div class="flex items-center gap-3">
             <img src="https://placehold.co/40x40/dde1ef/555?text=AO" class="w-9 h-9 rounded-full" alt="Alexia O.">
             <div>
@@ -174,23 +180,23 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="bg-sage px-6 py-12">
+  <section class="bg-sage px-6 py-16 sm:py-20">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="font-serif text-3xl sm:text-4xl mb-3">Cómo funciona</h2>
-      <p class="text-ink/60 max-w-md mx-auto mb-10">Lambda es una IA personalizada, potenciada por todo lo que tu empresa ve, dice o escucha.</p>
+      <h2 class="font-serif text-3xl sm:text-4xl tracking-tight mb-3">Cómo funciona</h2>
+      <p class="text-ink/60 max-w-md mx-auto mb-12">Lambda es una IA personalizada, potenciada por todo lo que tu empresa ve, dice o escucha.</p>
       <div class="grid sm:grid-cols-3 gap-10 text-left">
         <div>
-          <div class="w-8 h-8 rounded-full bg-ink text-white text-xs flex items-center justify-center mb-4">1</div>
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 text-white text-sm font-medium shadow-sm flex items-center justify-center mb-4">1</div>
           <h3 class="font-semibold mb-2">Instala Lambda</h3>
           <p class="text-sm text-ink/60">Lambda captura datos de forma imperceptible en segundo plano, indexando tu contenido de trabajo y audio.</p>
         </div>
         <div>
-          <div class="w-8 h-8 rounded-full bg-ink text-white text-xs flex items-center justify-center mb-4">2</div>
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 text-white text-sm font-medium shadow-sm flex items-center justify-center mb-4">2</div>
           <h3 class="font-semibold mb-2">Configúralo y olvídate</h3>
           <p class="text-sm text-ink/60">Lambda comprime, transcribe y almacena tus datos de forma segura y accesible solo para tu equipo.</p>
         </div>
         <div>
-          <div class="w-8 h-8 rounded-full bg-ink text-white text-xs flex items-center justify-center mb-4">3</div>
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 text-white text-sm font-medium shadow-sm flex items-center justify-center mb-4">3</div>
           <h3 class="font-semibold mb-2">Pregúntale a tu IA lo que sea</h3>
           <p class="text-sm text-ink/60">Pide a Lambda que resuma reuniones, redacte correos y mucho más.</p>
         </div>
@@ -199,12 +205,12 @@
   </section>
 
   <!-- OVERCOME LIMITATIONS -->
-  <section class="bg-lav px-6 py-14">
+  <section class="bg-lav px-6 py-16 sm:py-20">
     <div class="max-w-4xl mx-auto">
-      <h2 class="font-serif text-3xl sm:text-4xl text-center mb-10">Supera las limitaciones de tu equipo</h2>
+      <h2 class="font-serif text-3xl sm:text-4xl tracking-tight text-center mb-14">Supera las limitaciones de tu equipo</h2>
 
       <!-- Row 1 -->
-      <div class="grid sm:grid-cols-2 gap-10 items-center mb-12">
+      <div class="grid sm:grid-cols-2 gap-10 items-center mb-16">
         <div>
           <p class="text-xs font-semibold tracking-wide text-ink/40 mb-3">REUNIONES</p>
           <h3 class="font-serif text-2xl mb-3">Automatiza la toma de notas y obtén resúmenes de reunión a nivel humano</h3>
@@ -215,13 +221,13 @@
             <li class="flex items-center gap-2"><span class="text-ink/40">✓</span> Funciona incluso sin conexión</li>
           </ul>
         </div>
-        <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="bg-white rounded-2xl shadow-lg shadow-black/5 p-4">
           <img src="https://placehold.co/560x360/ffffff/999?text=Resumen+de+reuni%C3%B3n" alt="Resumen de reunión generado por Lambda" class="w-full rounded-lg">
         </div>
       </div>
 
       <!-- Row 2 -->
-      <div class="grid sm:grid-cols-2 gap-10 items-center mb-12">
+      <div class="grid sm:grid-cols-2 gap-10 items-center mb-16">
         <div>
           <p class="text-xs font-semibold tracking-wide text-ink/40 mb-3">HISTORIAL DEL NAVEGADOR</p>
           <h3 class="font-serif text-2xl mb-3">Evita repetir trabajo perdido cuando un sistema falla inevitablemente</h3>
@@ -232,7 +238,7 @@
             <li class="flex items-center gap-2"><span class="text-ink/40">✓</span> Recupera cualquier cosa vista</li>
           </ul>
         </div>
-        <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="bg-white rounded-2xl shadow-lg shadow-black/5 p-4">
           <img src="https://placehold.co/560x360/ffffff/999?text=Navegador+recuperado" alt="Recuperación de navegador de Lambda" class="w-full rounded-lg">
         </div>
       </div>
@@ -249,7 +255,7 @@
             <li class="flex items-center gap-2"><span class="text-ink/40">✓</span> Resúmenes impresionantes</li>
           </ul>
         </div>
-        <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="bg-white rounded-2xl shadow-lg shadow-black/5 p-4">
           <img src="https://placehold.co/560x360/ffffff/999?text=Chat+con+Lambda" alt="Chat con el asistente de Lambda" class="w-full rounded-lg">
         </div>
       </div>
@@ -257,12 +263,13 @@
   </section>
 
   <!-- WORK SMARTER -->
-  <section class="bg-purpletint px-6 py-14">
+  <section class="bg-purpletint px-6 py-16 sm:py-20">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="font-serif text-3xl sm:text-4xl mb-10">Para equipos que quieren <span class="italic">trabajar más inteligente</span>, mejor y más rápido</h2>
-      <div class="grid sm:grid-cols-2 gap-4 mb-6 text-left">
-        <div class="bg-white rounded-2xl p-6">
-          <p class="text-sm mb-4">"Lo uso para conectar mejor con mis 10 colaboradores directos."</p>
+      <h2 class="font-serif text-3xl sm:text-4xl tracking-tight mb-12">Para equipos que quieren <span class="italic">trabajar más inteligente</span>, mejor y más rápido</h2>
+      <div class="grid sm:grid-cols-2 gap-5 mb-8 text-left">
+        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <span class="font-serif text-3xl text-ink/15 leading-none">❝</span>
+          <p class="text-sm -mt-2 mb-4">Lo uso para conectar mejor con mis 10 colaboradores directos.</p>
           <div class="flex items-center gap-3">
             <img src="https://placehold.co/40x40/e8e1f0/555?text=L" class="w-9 h-9 rounded-full" alt="Lucía">
             <div>
@@ -271,8 +278,9 @@
             </div>
           </div>
         </div>
-        <div class="bg-white rounded-2xl p-6">
-          <p class="text-sm mb-4">"Se siente como un superpoder: puedo recordar cada detalle sin interrumpir llamadas para tomar notas."</p>
+        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <span class="font-serif text-3xl text-ink/15 leading-none">❝</span>
+          <p class="text-sm -mt-2 mb-4">Se siente como un superpoder: puedo recordar cada detalle sin interrumpir llamadas para tomar notas.</p>
           <div class="flex items-center gap-3">
             <img src="https://placehold.co/40x40/dde1ef/555?text=N" class="w-9 h-9 rounded-full" alt="Nico">
             <div>
@@ -282,35 +290,35 @@
           </div>
         </div>
       </div>
-      <button class="bg-white text-ink text-sm font-medium px-6 py-2.5 rounded-full shadow-sm hover:bg-ink hover:text-white transition">Ver más</button>
+      <button class="bg-white text-ink text-sm font-medium px-6 py-2.5 rounded-full shadow-sm hover:bg-ink hover:text-white hover:shadow-md hover:-translate-y-0.5 transition-all">Ver más</button>
     </div>
   </section>
 
   <!-- PRIVATE BY DESIGN -->
-  <section class="bg-forest text-white px-6 py-14">
+  <section class="bg-forest text-white px-6 py-16 sm:py-20">
     <div class="max-w-5xl mx-auto grid sm:grid-cols-2 gap-12 items-center">
       <div>
-        <h2 class="font-serif text-3xl mb-4">Privado por diseño</h2>
+        <h2 class="font-serif text-3xl tracking-tight mb-4">Privado por diseño</h2>
         <p class="text-white/60 text-sm mb-6 max-w-sm">Capturar todo lo que ves, dices y escuchas implica que la privacidad es más importante que nunca.</p>
-        <button class="bg-white text-ink text-sm font-medium px-5 py-2.5 rounded-full hover:bg-white/90 transition">Más información</button>
+        <button class="bg-white text-ink text-sm font-medium px-5 py-2.5 rounded-full shadow-sm hover:bg-white/90 hover:shadow-md hover:-translate-y-0.5 transition-all">Más información</button>
       </div>
       <div class="space-y-6">
         <div class="flex gap-4">
-          <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">💻</div>
+          <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-lg">💻</div>
           <div>
             <h4 class="font-medium text-sm mb-1">Almacenado localmente</h4>
             <p class="text-xs text-white/50">Todo tu contenido y grabaciones se almacenan localmente en tu dispositivo, no en la nube.</p>
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">☁️</div>
+          <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-lg">☁️</div>
           <div>
             <h4 class="font-medium text-sm mb-1">No requiere nube</h4>
             <p class="text-xs text-white/50">Lambda no necesita conexión a internet para acceder a tus datos desde otros dispositivos.</p>
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">🔒</div>
+          <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-lg">🔒</div>
           <div>
             <h4 class="font-medium text-sm mb-1">La navegación privada no se captura</h4>
             <p class="text-xs text-white/50">Cualquier pestaña en modo incógnito nunca se registra ni se guarda en el historial.</p>
@@ -321,29 +329,29 @@
   </section>
 
   <!-- MAKE WORK ENJOYABLE -->
-  <section class="bg-cream px-6 py-14">
+  <section class="bg-cream px-6 py-16 sm:py-20">
     <div class="max-w-5xl mx-auto grid sm:grid-cols-2 gap-12 items-center">
       <div>
-        <h2 class="font-serif text-3xl mb-4">Haz que el trabajo y la vida sean más placenteros</h2>
+        <h2 class="font-serif text-3xl tracking-tight mb-4">Haz que el trabajo y la vida sean más placenteros</h2>
         <p class="text-ink/60 text-sm max-w-sm">Todo es más fácil cuando sientes que tienes el control de todo.</p>
       </div>
       <div class="space-y-6">
         <div class="flex gap-4">
-          <div class="w-9 h-9 rounded-lg bg-ink/5 flex items-center justify-center shrink-0">🧘</div>
+          <div class="w-9 h-9 rounded-lg bg-ink/5 flex items-center justify-center shrink-0 text-lg">🧘</div>
           <div>
             <h4 class="font-medium text-sm mb-1">Ten tranquilidad</h4>
             <p class="text-xs text-ink/50">Deja de preocuparte por perder algo importante.</p>
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="w-9 h-9 rounded-lg bg-ink/5 flex items-center justify-center shrink-0">🎧</div>
+          <div class="w-9 h-9 rounded-lg bg-ink/5 flex items-center justify-center shrink-0 text-lg">🎧</div>
           <div>
             <h4 class="font-medium text-sm mb-1">Sé más presente</h4>
             <p class="text-xs text-ink/50">Especialmente en reuniones, sin la presión de tomar notas.</p>
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="w-9 h-9 rounded-lg bg-ink/5 flex items-center justify-center shrink-0">✨</div>
+          <div class="w-9 h-9 rounded-lg bg-ink/5 flex items-center justify-center shrink-0 text-lg">✨</div>
           <div>
             <h4 class="font-medium text-sm mb-1">Siéntete sin límites</h4>
             <p class="text-xs text-ink/50">Recuerda mucho más de lo que la memoria humana permite.</p>
@@ -354,9 +362,9 @@
   </section>
 
   <!-- CTA -->
-  <section class="bg-white px-6 py-14 text-center">
-    <h2 class="font-serif text-3xl sm:text-4xl max-w-lg mx-auto mb-6">Descubre tu nuevo superpoder hoy</h2>
-    <form class="lead-form bg-cream rounded-2xl shadow-sm border border-black/5 p-6 sm:p-8 max-w-xl mx-auto text-left">
+  <section class="bg-white px-6 py-16 sm:py-20 text-center">
+    <h2 class="font-serif text-3xl sm:text-4xl tracking-tight max-w-lg mx-auto mb-6">Descubre tu nuevo superpoder hoy</h2>
+    <form class="lead-form bg-cream rounded-2xl shadow-lg shadow-black/5 border border-black/5 p-6 sm:p-8 max-w-xl mx-auto text-left">
       <div class="grid sm:grid-cols-2 gap-4 mb-4">
         <div>
           <label class="block text-xs font-medium text-ink/60 mb-1">Nombre</label>
@@ -397,27 +405,27 @@
   </section>
 
   <!-- FAQ -->
-  <section class="bg-tan px-6 py-14">
+  <section class="bg-tan px-6 py-16 sm:py-20">
     <div class="max-w-4xl mx-auto grid sm:grid-cols-[1fr_1.5fr] gap-10">
       <div>
-        <h2 class="font-serif text-3xl mb-3">FAQ</h2>
+        <h2 class="font-serif text-3xl tracking-tight mb-3">FAQ</h2>
         <p class="text-sm text-ink/60">Visita nuestro centro de ayuda para contactarnos. Respondemos muy rápido.</p>
       </div>
-      <div class="divide-y divide-black/10 bg-white/50 rounded-xl px-5">
-        <details class="py-4">
-          <summary class="cursor-pointer text-sm font-medium">¿Cómo funciona la compresión de Lambda?</summary>
+      <div class="divide-y divide-black/10 bg-white/50 rounded-xl px-5 shadow-sm">
+        <details class="faq-item py-4">
+          <summary class="faq-summary cursor-pointer text-sm font-medium flex items-center justify-between gap-4">¿Cómo funciona la compresión de Lambda?<span class="faq-icon text-ink/30 text-lg leading-none shrink-0">+</span></summary>
         </details>
-        <details class="py-4">
-          <summary class="cursor-pointer text-sm font-medium">¿Cuánta CPU consume Lambda?</summary>
+        <details class="faq-item py-4">
+          <summary class="faq-summary cursor-pointer text-sm font-medium flex items-center justify-between gap-4">¿Cuánta CPU consume Lambda?<span class="faq-icon text-ink/30 text-lg leading-none shrink-0">+</span></summary>
         </details>
-        <details class="py-4">
-          <summary class="cursor-pointer text-sm font-medium">Grabación y transcripción de audio con Lambda</summary>
+        <details class="faq-item py-4">
+          <summary class="faq-summary cursor-pointer text-sm font-medium flex items-center justify-between gap-4">Grabación y transcripción de audio con Lambda<span class="faq-icon text-ink/30 text-lg leading-none shrink-0">+</span></summary>
         </details>
-        <details class="py-4">
-          <summary class="cursor-pointer text-sm font-medium">¿Qué hardware se necesita para ejecutar Lambda?</summary>
+        <details class="faq-item py-4">
+          <summary class="faq-summary cursor-pointer text-sm font-medium flex items-center justify-between gap-4">¿Qué hardware se necesita para ejecutar Lambda?<span class="faq-icon text-ink/30 text-lg leading-none shrink-0">+</span></summary>
         </details>
-        <details class="py-4">
-          <summary class="cursor-pointer text-sm font-medium">¿Dónde van mis datos?</summary>
+        <details class="faq-item py-4">
+          <summary class="faq-summary cursor-pointer text-sm font-medium flex items-center justify-between gap-4">¿Dónde van mis datos?<span class="faq-icon text-ink/30 text-lg leading-none shrink-0">+</span></summary>
         </details>
       </div>
     </div>
@@ -430,35 +438,35 @@
         <div>
           <span class="font-serif text-lg text-white">Lambda</span>
           <p class="text-xs text-white/40 mt-2 max-w-[180px]">Una IA personalizada para tu empresa.</p>
-          <button data-scroll-to-form class="mt-4 bg-white text-ink text-xs font-medium px-4 py-2 rounded-full">Solicitar demo</button>
+          <button data-scroll-to-form class="mt-4 bg-white text-ink text-xs font-medium px-4 py-2 rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">Solicitar demo</button>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-10 text-xs">
           <div>
             <p class="text-white/40 mb-3">COMPAÑÍA</p>
             <ul class="space-y-2">
-              <li><a href="#">Nosotros</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Empleo</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Prensa</a></li>
-              <li><a href="#">Noticias</a></li>
-              <li><a href="#">Comunidad</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Nosotros</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Empleo</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Twitter</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Prensa</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Noticias</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Comunidad</a></li>
             </ul>
           </div>
           <div>
             <p class="text-white/40 mb-3">CASOS DE USO</p>
             <ul class="space-y-2">
-              <li><a href="#">Reuniones</a></li>
-              <li><a href="#">Ventas</a></li>
-              <li><a href="#">Soporte</a></li>
-              <li><a href="#">Operaciones</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Reuniones</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Ventas</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Soporte</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Operaciones</a></li>
             </ul>
           </div>
           <div>
             <p class="text-white/40 mb-3">LEGAL</p>
             <ul class="space-y-2">
-              <li><a href="#">Privacidad</a></li>
-              <li><a href="#">Términos</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Privacidad</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Términos</a></li>
             </ul>
           </div>
         </div>
