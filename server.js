@@ -7,6 +7,7 @@ const express = require('express');
 const { scrapeWebsite } = require('./lib/scrapeWebsite');
 const { scoreLead } = require('./lib/scoreLead');
 const { saveLeadToAirtable } = require('./lib/airtable');
+const { sendConfirmationEmail } = require('./lib/sendEmail');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -58,6 +59,12 @@ app.post('/api/leads', async (req, res) => {
   } catch (err) {
     console.error('Error al guardar en Airtable, usando respaldo local:', err);
     appendFallbackLog({ lead, scrape, scoring, savedAt: new Date().toISOString() });
+  }
+
+  try {
+    await sendConfirmationEmail({ lead, scoring });
+  } catch (err) {
+    console.error('Error al enviar el correo de confirmación:', err);
   }
 
   res.json({ ok: true, message: 'Gracias, hemos recibido tu solicitud. Nos pondremos en contacto pronto.' });
