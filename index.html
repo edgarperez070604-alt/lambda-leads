@@ -56,12 +56,12 @@
           <a href="#" class="hover:text-ink">Casos de uso</a>
         </div>
       </div>
-      <a href="#" class="bg-ink text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-ink/90 transition">Solicitar demo</a>
+      <a href="#formulario" data-scroll-to-form class="bg-ink text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-ink/90 transition">Solicitar demo</a>
     </nav>
   </header>
 
   <!-- HERO -->
-  <section class="hero-gradient pt-16 pb-10 px-6">
+  <section id="formulario" class="hero-gradient pt-16 pb-10 px-6">
     <div class="max-w-3xl mx-auto text-center">
       <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur px-4 py-1.5 rounded-full text-xs font-medium text-ink/70 mb-6 shadow-sm">
         <span>🎉</span> Ahora disponible para empresas
@@ -430,7 +430,7 @@
         <div>
           <span class="font-serif text-lg text-white">Lambda</span>
           <p class="text-xs text-white/40 mt-2 max-w-[180px]">Una IA personalizada para tu empresa.</p>
-          <button class="mt-4 bg-white text-ink text-xs font-medium px-4 py-2 rounded-full">Solicitar demo</button>
+          <button data-scroll-to-form class="mt-4 bg-white text-ink text-xs font-medium px-4 py-2 rounded-full">Solicitar demo</button>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-10 text-xs">
           <div>
@@ -474,6 +474,13 @@
   </footer>
 
   <script>
+    document.querySelectorAll('[data-scroll-to-form]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('.lead-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+
     document.querySelectorAll('form.lead-form').forEach((form) => {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -486,26 +493,37 @@
         button.textContent = 'Enviando...';
         status.classList.add('hidden');
 
+        const slowNoticeTimer = setTimeout(() => {
+          button.textContent = 'Preparando servidor...';
+        }, 6000);
+
         try {
           const res = await fetch('/api/leads', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
           });
-          const result = await res.json();
+
+          let result = {};
+          try {
+            result = await res.json();
+          } catch (parseErr) {
+            result = {};
+          }
 
           status.textContent = res.ok
             ? (result.message || 'Gracias, hemos recibido tu solicitud.')
-            : (result.error || 'Ocurrió un error, inténtalo de nuevo.');
+            : (result.error || `Ocurrió un error (${res.status}), inténtalo de nuevo en un momento.`);
           status.classList.remove('hidden', 'text-red-500', 'text-emerald-600');
           status.classList.add(res.ok ? 'text-emerald-600' : 'text-red-500');
 
           if (res.ok) form.reset();
         } catch (err) {
-          status.textContent = 'No se pudo enviar el formulario. Revisa tu conexión e inténtalo de nuevo.';
+          status.textContent = 'No se pudo conectar con el servidor. Espera unos segundos e inténtalo de nuevo.';
           status.classList.remove('hidden');
           status.classList.add('text-red-500');
         } finally {
+          clearTimeout(slowNoticeTimer);
           button.disabled = false;
           button.textContent = originalLabel;
         }
